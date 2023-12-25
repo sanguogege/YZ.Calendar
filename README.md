@@ -49,7 +49,7 @@ SolarFunction.GetTerm(int year,int month)
 SolarFunction.GetAnimal(int year)
 
  /// <summary>
- /// 数字转中文
+ /// 数字转中文(1-10)0表示日
  /// </summary>
  /// <returns>'日','一','二','三','四','五','六','七','八','九','十'</returns>
 SolarFunction.ToChinaNum(int num)
@@ -84,7 +84,7 @@ SolarFunction.ToChinaNum(int num)
  LunarFunction.LMonthDays(int year,int month)
 
 /// <summary>
-/// 传入农历数字月份返回汉语通俗表示法
+/// 传入农历数字月份返回汉语通俗表示法（1-12）
 /// </summary>
 /// <returns>'正','二','三','四','五','六','七','八','九','十','冬','腊'</returns>
  LunarFunction.ToChinaMonth(int month)
