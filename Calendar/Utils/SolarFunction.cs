@@ -27,6 +27,10 @@ namespace YZ.Calendar
         public static int SolarFirstWeek(int year,int month)
         {
             DateTime solarDate = new(year, month, 1, 0, 0, 0, 0);
+            if (solarDate.DayOfWeek ==0)
+            {
+                return 7;
+            }
             return (int)solarDate.DayOfWeek;
         }
 
