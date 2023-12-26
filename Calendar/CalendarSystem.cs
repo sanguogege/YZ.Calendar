@@ -7,6 +7,7 @@
 
         /// <summary>
         /// 设置休息日与调休日的json文件地址，推荐绝对路径
+        /// 不填返回null
         /// </summary>
         public static string SetRestPath
         {
@@ -15,6 +16,7 @@
 
         /// <summary>
         /// 设置节假日的json文件地址，推荐绝对路径
+        /// 不填返回false
         /// </summary>
         public static string SetFastivalPath
         {

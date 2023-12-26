@@ -14,14 +14,50 @@ CalendarYZ result2 = CalendarSystem.LunartoSolarFun(int LYear, int LMonth, int L
 
 /// <summary>
 /// 设置节假日的json文件地址，推荐绝对路径
+/// 不填返回null
 /// </summary>
 CalendarSystem.SetFastivalPath
 
 /// <summary>
 /// 设置休息日与调休日的json文件地址，推荐绝对路径
+/// 不填返回false
 /// </summary>
 CalendarSystem.SetRestPath
  ```
+
+#### 节日格式 json
+```
+{
+    "sFtv": {
+        "1001": [
+            "国庆节",
+            "国际音乐日",
+            "世界微笑日",
+            "国际老人节"
+        ],
+    },
+    "lFtv":{
+        "0101": [
+            "春节"
+        ]
+    }
+}
+```
+#### 休息日与调休日 json
+```
+{
+    "2020": {
+        "xiu": ["0101","0124","0125"],
+        "ban": [ "0119","0201","0426"]
+    },
+    "2021":{
+        "0101": [
+            "春节"
+        ]
+    }
+}
+```
+
 
  ## 其他方法
 - 阳历的方法
