@@ -1,6 +1,9 @@
-万年历农历阳历转换插件
+# 万年历农历阳历转换插件 YZ.Calendar
+[![NuGet version (YZ.Calendar)](https://img.shields.io/nuget/v/YZ.Calendar.svg?style=flat-square)](https://www.nuget.org/packages/YZ.Calendar/)
 
-### YZ.Calendar
+- A plugin that can convert Chinese lunar and solar calendars. 
+- 一个能转换中国农历和阳历的插件。
+
 
 ```
 using YZ.Calendar 
