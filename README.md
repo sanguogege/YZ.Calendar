@@ -12,6 +12,15 @@ CalendarYZ result2 = CalendarSystem.SolarToLunarFun(int year, int month, int day
  //阳历转农历，农历年月日，isLeapMonth表示是否润月，默认为false
 CalendarYZ result2 = CalendarSystem.LunartoSolarFun(int LYear, int LMonth, int LDay, bool isLeapMonth);
 
+/// <summary>
+/// 设置节假日的json文件地址，推荐绝对路径
+/// </summary>
+CalendarSystem.SetFastivalPath
+
+/// <summary>
+/// 设置休息日与调休日的json文件地址，推荐绝对路径
+/// </summary>
+CalendarSystem.SetRestPath
  ```
 
  ## 其他方法

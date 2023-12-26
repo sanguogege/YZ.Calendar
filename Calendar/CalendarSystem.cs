@@ -2,20 +2,50 @@
 {
     public class CalendarSystem
     {
+        internal static string RestPath = "";
+        internal static string FastivalPath = "";
+
+        /// <summary>
+        /// 设置休息日与调休日的json文件地址，推荐绝对路径
+        /// </summary>
+        public static string SetRestPath
+        {
+            set { RestPath = value; }
+        }
+
+        /// <summary>
+        /// 设置节假日的json文件地址，推荐绝对路径
+        /// </summary>
+        public static string SetFastivalPath
+        {
+            set { FastivalPath = value; }
+        }
+
+        /// <summary>
+        /// 阳历转农历无参数
+        /// </summary>
+        /// <returns>CalendarYZ今日的数据</returns>
         public static CalendarYZ SolarToLunarFun()
         {
             return CalendarCore.SolarToLunarCore(DateTime.Now);
         }
 
+        /// <summary>
+        /// 阳历转农历指定日期
+        /// </summary>
+        /// <returns>CalendarYZ今日的数据</returns>
         public static CalendarYZ SolarToLunarFun(int year,int month,int day)
         {
             return CalendarCore.SolarToLunarCore(new DateTime(year,month,day));
         }
 
+        /// <summary>
+        /// 农历转阳历指定日期，isLeapMonth表示是否闰月，默认false，可不填。
+        /// </summary>
+        /// <returns>CalendarYZ今日的数据</returns>
         public static CalendarYZ LunartoSolarFun(int y,int m,int d , bool isLeapMonth = false)
         {
             //参数区间1900.1.31~2100.12.1
-            isLeapMonth = !!isLeapMonth;
            
             int day = LunarFunction.LMonthDays(y, m);
 
@@ -61,6 +91,5 @@
 
             return SolarToLunarFun(cY, cM, cD);
         }
-
     }
 }

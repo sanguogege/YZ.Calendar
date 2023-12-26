@@ -81,24 +81,31 @@
         /// <summary>
         /// 是否休息
         /// </summary>
-        public bool? IsRest { get; set; } = false;
+        public bool? IsXiu { get; set; } = false;
         /// <summary>
         /// 是否调休上班
         /// </summary>
         public bool? IsBan { get; set; } = false;
         /// <summary>
-        /// 今日的节假日
+        /// 今日的阳历节日
         /// </summary>
-        public string[]? Festival { get; set; }
+        public string[]? SolarFestival { get; set; }
+        /// <summary>
+        /// 今日的农历节日
+        /// </summary>
+        public string[]? LunatFestival { get; set; }
     }
 
-    public class RestAndBan
+    partial class ResBox
     {
-
-    }
-
-    public class Festival
-    {
+        /// <summary>
+        /// 是否为休息日
+        /// </summary>
+        public bool IsXiu {  get; set; }
+        /// <summary>
+        /// 是否为调休日
+        /// </summary>
+        public bool IsBan {  get; set; }
 
     }
 }

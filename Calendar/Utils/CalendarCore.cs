@@ -1,8 +1,14 @@
 ﻿
+using Newtonsoft.Json;
+
 namespace YZ.Calendar
 {
     internal static class CalendarCore
     {
+        /// <summary>
+        /// 转换核心
+        /// </summary>
+        /// <returns>CalendarYZ类型</returns>
         internal static CalendarYZ SolarToLunarCore(DateTime objData)
         {
             int i, leap, temp = 0, y, m, d;
@@ -132,6 +138,26 @@ namespace YZ.Calendar
             //该日期所属的星座
             string Astro = SolarFunction.ToAstro(m, d);
 
+            //获取节日
+            string[]? SolarFest = null;
+            string[]? LunatFest = null;
+            if (CalendarSystem.FastivalPath!= "")
+            {
+                SolarFest = GetFastival(m,d, CalendarSystem.FastivalPath);
+                LunatFest = GetFastival(month, day, CalendarSystem.FastivalPath,false);
+            }
+
+            //获取当日是否休息
+            bool IsXiu = false;
+            bool IsBan = false;
+            if (CalendarSystem.RestPath!= "")
+            {
+                ResBox ResBox = GetBanXiu(y, m, d, CalendarSystem.RestPath);
+                IsXiu = ResBox.IsXiu;
+                IsBan = ResBox.IsBan;
+            }
+
+
             return new CalendarYZ()
             {
                 LYear = year,
@@ -152,10 +178,18 @@ namespace YZ.Calendar
                 NWeek = nWeek,
                 NcWeek = "\u661f\u671f" + cWeek,
                 Term = Term,
-                Astro = Astro
+                Astro = Astro,
+                SolarFestival = SolarFest,
+                LunatFestival = LunatFest,
+                IsBan = IsBan,
+                IsXiu = IsXiu
             };
         }
 
+        /// <summary>
+        /// 获取指定时间的Utc毫秒值。
+        /// </summary>
+        /// <returns>long型整数</returns>
         private static long DateTimeOffset(int year, int month, int day)
         {
             DateTime utcDateTime = DateTime.SpecifyKind(new DateTime(year, month, day), DateTimeKind.Utc);
@@ -163,5 +197,68 @@ namespace YZ.Calendar
             return utcDateTimeOffset.ToUnixTimeMilliseconds();
         }
 
+        /// <summary>
+        /// 获取阳历节日和农历节日，IsSolar默认为true,表示阳历，false表示农历
+        /// </summary>
+        /// <returns>字符串数组</returns>
+        private static string[]? GetFastival( int month, int day, string jsonPath, bool IsSolar = true)
+        {
+            string _target = AddZero(month) + AddZero(day);
+            string jsonContent = File.ReadAllText(jsonPath);
+            var fastivalData = JsonConvert.DeserializeObject<dynamic>(jsonContent);
+
+            if (IsSolar&& fastivalData?.sFtv.ContainsKey(_target))
+            {
+                return fastivalData?.sFtv[_target].ToObject<string[]>();
+            }
+            else if (!IsSolar && fastivalData?.lFtv.ContainsKey(_target))
+            {
+                return fastivalData?.lFtv[_target].ToObject<string[]>();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 获取休息日和调休日
+        /// </summary>
+        /// <returns>ResBox对象returns>
+        private static ResBox GetBanXiu(int year, int month, int day, string jsonPath)
+        {
+            string _year = year.ToString();
+            string _target = AddZero(month) + AddZero(day);
+
+            string jsonContent = File.ReadAllText(jsonPath);
+            var restData = JsonConvert.DeserializeObject<dynamic>(jsonContent);
+
+            if (restData?.ContainsKey(_year))
+            {
+                var xiuBox = restData?[_year].xiu.ToString();
+                var banBox = restData?[_year].ban.ToString();
+                return new ResBox
+                {
+                    IsXiu = xiuBox?.Contains(_target),
+                    IsBan = banBox?.Contains(_target)
+                };
+            }
+
+            return new ResBox
+            {
+                IsXiu = false,
+                IsBan = false
+            };
+
+        }
+
+        /// <summary>
+        /// 为小于10的数前面加0
+        /// </summary>
+        /// <returns>(01、29、30)</returns>
+        private static string AddZero(int num)
+        {
+            return num < 10 ? "0" + num.ToString() : num.ToString();
+        }
     }
 }
