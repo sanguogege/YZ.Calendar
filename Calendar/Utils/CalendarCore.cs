@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace YZ.Calendar
 {
@@ -224,7 +223,7 @@ namespace YZ.Calendar
         /// <summary>
         /// 获取休息日和调休日
         /// </summary>
-        /// <returns>ResBox对象returns>
+        /// <returns>ResBox对象</returns>
         private static ResBox GetBanXiu(int year, int month, int day, string jsonPath)
         {
             string _year = year.ToString();
