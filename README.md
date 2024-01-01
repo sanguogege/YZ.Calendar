@@ -10,22 +10,24 @@ using YZ.Calendar
 ```
 
  ```C#
- //阳历转农历，阳历年月日
-CalendarYZ result2 = CalendarSystem.SolarToLunarFun(int year, int month, int day);
- //阳历转农历，农历年月日，isLeapMonth表示是否润月，默认为false
-CalendarYZ result2 = CalendarSystem.LunartoSolarFun(int LYear, int LMonth, int LDay, bool isLeapMonth);
-
-/// <summary>
-/// 设置节假日的json文件地址，推荐绝对路径
+ /// <summary>
+/// 设置节假日的json文件地址，推荐绝对路径，优先设置。
 /// 不填返回null
 /// </summary>
 CalendarSystem.SetFastivalPath
 
 /// <summary>
-/// 设置休息日与调休日的json文件地址，推荐绝对路径
+/// 设置休息日与调休日的json文件地址，推荐绝对路径，优先设置。
 /// 不填返回false
 /// </summary>
 CalendarSystem.SetRestPath
+
+ //阳历转农历，阳历年月日
+CalendarYZ result2 = CalendarSystem.SolarToLunarFun(int year, int month, int day);
+ //阳历转农历，农历年月日，isLeapMonth表示是否润月，默认为false
+CalendarYZ result2 = CalendarSystem.LunartoSolarFun(int LYear, int LMonth, int LDay, bool isLeapMonth);
+
+
  ```
 
 #### 节日格式 json
