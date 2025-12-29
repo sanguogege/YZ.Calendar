@@ -1,4 +1,6 @@
-﻿namespace YZ.Calendar;
+﻿using Microsoft.VisualBasic;
+
+namespace YZ.Calendar;
 
 internal static class CalendarData
 {
@@ -589,3 +591,4 @@ internal static class CalendarData
         "\u814a"
     };
 }
+
